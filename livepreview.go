@@ -18,6 +18,8 @@
 
 package virb
 
+import "fmt"
+
 type LivePreviewRequest struct {
 	Command               string `json:"command"`
 	StreamType            string `json:"streamType"` // Required, "rtp".
@@ -35,7 +37,7 @@ func LivePreview(host string, streamType string, maxResolution int, active strin
 	req.Command = "livePreview"
 	req.StreamType = streamType
 	if maxResolution > 0 {
-		req.MaxResolutionVertical = string(maxResolution)
+		req.MaxResolutionVertical = fmt.Sprint(maxResolution)
 	}
 	req.LiveStreamActive = active
 

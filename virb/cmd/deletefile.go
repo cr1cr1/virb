@@ -19,8 +19,6 @@
 package cmd
 
 import (
-	"fmt"
-
 	"github.com/scottlaird/virb"
 	"github.com/spf13/cobra"
 )
@@ -35,7 +33,7 @@ var deletefileCmd = &cobra.Command{
 		if err != nil {
 			panic(err)
 		}
-		fmt.Printf("%+v\n", *resp)
+		printResponse(resp)
 	},
 }
 

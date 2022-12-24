@@ -19,6 +19,7 @@
 package cmd
 
 import (
+	"encoding/json"
 	"fmt"
 	"os"
 
@@ -55,7 +56,7 @@ func init() {
 	// Cobra supports persistent flags, which, if defined here,
 	// will be global for your application.
 	rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.virb.yaml)")
-	rootCmd.PersistentFlags().StringVar(&hostname, "camera", "10.1.0.180", "hostname")
+	rootCmd.PersistentFlags().StringVar(&hostname, "camera", "192.168.1.111", "hostname")
 
 	// Cobra also supports local flags, which will only run
 	// when this action is called directly.
@@ -86,4 +87,13 @@ func initConfig() {
 	if err := viper.ReadInConfig(); err == nil {
 		fmt.Println("Using config file:", viper.ConfigFileUsed())
 	}
+}
+
+// printResponse prints pretty json response
+func printResponse(resp interface{}) {
+	pretty, err := json.MarshalIndent(resp, "", "  ")
+	if err != nil {
+		panic(err)
+	}
+	fmt.Printf("%s\n", string(pretty))
 }
